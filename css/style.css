@@ -1,0 +1,237 @@
+th {
+    font-size: 16px;
+}
+
+#inversiones td {
+    font-size: 14px;
+    /* Tamaño de fuente deseado */
+}
+
+.totalPartida {
+    background-color: #003366;
+    position: relative;
+    width: 96%;
+    margin-bottom: 15px;
+    left: 30px;
+    padding: 5px;
+    border-radius: 10px;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25);
+}
+
+#contenedorInfo-Tabla {
+    padding: 10px;
+}
+
+h1 {
+    color: black;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+label {
+    font-size: 22px;
+    color: black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+select,
+input {
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25);
+}
+
+#marco {
+    height: 100vh;
+    background-color: rgb(13, 110, 253, 0.3);
+}
+
+#contenedor-form {
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+.marco-botones {
+    height: 70px;
+}
+
+.marco-botones.marco-botones {
+    width: 95%;
+}
+
+#marco .btn.active {
+    border: 1px solid rgb(13, 110, 253);
+    background-color: #f8f9fa;
+}
+
+button {
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25);
+}
+
+#mi-segundo-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9900;
+}
+
+.alert-danger {
+    --bs-alert-color: #842029;
+    --bs-alert-bg: #f8d7da;
+    --bs-alert-border-color: #f5c2c7;
+    position: fixed;
+}
+
+.swal2-confirm.swal2-styled.swal2-default-outline {
+    margin-right: 30px;
+}
+
+#inversiones .table {
+    min-height: 250px;
+    padding-bottom: 50px;
+}
+
+
+/**/
+
+
+/* Definición de la paleta de colores */
+
+:root {
+    --color-azul-claro: #66CCFF;
+    --color-verde-menta: #00FFCC;
+    --color-gris-suave: #EFEFEF;
+    --color-azul-marino: #003366;
+}
+
+
+/* Estilos generales para el sistema */
+
+body {
+    background-color: var(--color-gris-suave);
+}
+
+
+/* Estilos para el encabezado */
+
+.bg-secondary {
+    background-color: var(--color-azul-claro);
+}
+
+
+/* Estilos para el formulario */
+
+.form-group .form-select,
+.form-group .form-control {
+    background-color: var(--color-gris-suave);
+    color: #000000;
+    border: 1px solid var(--color-azul-claro);
+}
+
+
+/* Estilos para la tabla */
+
+.table thead th {
+    background-color: var(--color-azul-claro);
+    color: black;
+}
+
+#contenedorTabla {
+    border: 1px solid rgb(0, 51, 102, 0.7);
+    width: 99%;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25);
+    padding-bottom: 25px;
+    margin-top: 30px;
+    border-radius: 10px;
+}
+
+#tituloSistema,
+#datosPartida {
+    background-color: var( --color-azul-marino);
+    color: white;
+    border: 2px solid #EFEFEF;
+    font-family: Arial, sans-serif;
+    font-size: 35px;
+    font-weight: bold;
+    color: #f0f0f0;
+    background-color: rgb(0, 51, 102, 0.7);
+    padding: 15px;
+    /* Puedes ajustar el valor para cambiar el espaciado interno */
+    border-radius: 10px;
+    /* Puedes ajustar el valor para cambiar la curvatura de las esquinas */
+    text-align: center;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25);
+    width: 95%;
+}
+
+#busqueda,
+#imprimirPartidas {
+    color: #f8f9fa;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border-radius: 10px;
+    z-index: 0;
+    background: #f8f9fa;
+    overflow: hidden;
+    color: #4433ff;
+}
+
+#busqueda:hover,
+#imprimirPartidas:hover {
+    color: #f8f9fa;
+}
+
+#busqueda:hover:after,
+#imprimirPartidas:hover:after {
+    height: 100%;
+}
+
+#busqueda:after,
+#imprimirPartidas:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    transition: all 0.3s ease;
+    left: 0;
+    bottom: 0;
+    height: 0;
+    width: 100%;
+    background: #0d6efd;
+}
+
+#contenedorBusqueda {
+    display: none;
+}
+
+div.dropdown>button {
+    background-color: rgb(0, 51, 102, 0.7);
+}
+
+div.dropdown>button:hover {
+    background-color: rgb(0, 51, 102, 0.7);
+    color: white;
+}
+
+.btn.dropdown-toggle.show {
+    background-color: rgb(0, 51, 102, 0.7) !important;
+    color: white !important;
+}
+
+.filaDeTotales {
+    background-color: #66CCFF;
+    font-weight: bold;
+}

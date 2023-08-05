@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sistema de control de gastos</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="http://localhost/Sistema%20de%20control%20de%20gastos%20Escuelas/icofont/icofont//icofont.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="http://anijs.github.io/lib/anicollection/anicollection.css">
+
+
+
+
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div id="marco" class="row">
+            <div class="col-sm-3 p-3 text-white">
+
+
+                <div id="tituloSistema" class="container-fluid  p-3   rounded text-center">
+
+                    Sistema de Control de Gastos
+
+                </div>
+
+
+
+
+
+
+
+
+                <div class="row mt-3 justify-content-center">
+                    <div class="marco-botones mt-3 "><a href="gestiondebenefactores.html"><button type="button" class="btn btn-primary w-100 h-100 btn-lg">Gestion de Benefactores</button></a></div>
+                    <div class="marco-botones mt-3 "><a href="gestiondetipopartidas.html"><button type="button" class="btn btn-primary w-100 h-100 btn-lg" >Gestion de Tipo Partidas</button></a></div>
+                    <div class="marco-botones mt-3 "><button type="button" class="btn btn-light w-100 h-100 btn-lg active">Gestion de Partidas</button></div>
+                </div>
+            </div>
+            <div class="col-sm-9 p-3 bg-light text-white">
+                <div id="agregarAlerta" class="conteiner">
+                    <div class="row">
+                        <div class="conteiner">
+
+
+
+                            <form>
+
+                                <div class="form-group">
+                                    <div class="col">
+                                        <div class="d-flex justify-content-center">
+
+                                            <a href="nuevapartida.html"><button id="agregarPartida" type="button" class="btn btn-primary btn-lg mt-3 m-3">Agregar Partida</button></a>
+                                            <button id="busqueda" type="button" class="btn  btn-lg mt-3 m-3">Filtrar Partidas</button>
+                                            <button id="imprimirPartidas" type="button" class="btn  btn-lg mt-3 m-3">Imprimir Partidas</button>
+                                        </div>
+
+                                    </div>
+
+                                    <div id="contenedorBusqueda">
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="idBenefactor" class="form-label">Benefactor:</label>
+                                                <select class="form-select" id="idBenefactor" name="idBenefactor" required>
+                                          <option value="" selected >Seleccione benefactor</option>
+                                         
+                                        </select>
+
+                                            </div>
+                                            <div class="col">
+
+
+                                                <label for="idTipopartida" class="form-label">Tipo Partida:</label>
+                                                <select class="form-select" id="idTipopartida" name="idTipopartida" required>
+                                          
+                                          
+                                          <option value="" selected >Seleccione Tipo partida</option>
+
+                                        </select>
+                                            </div>
+
+                                            <div class="col">
+
+                                                <label for="anio" class="form-label">Año Partida:</label>
+                                                <select class="form-select" id="anio" name="anio" required>
+                                         
+                                          <option value="" selected     >Seleccione año partida</option>
+                                        </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div id=contenedorTabla class="conteiner">
+                        <div class="row">
+                            <img id="imagenModalPartidas" class="d-none" src="" alt="Imagen del modal">
+
+                            <div class="conteiner mt-5">
+                                <img id="imagenModalPartidas" class="d-none" src="" alt="Imagen del modal">
+
+                                <table id="partidasDisponibles" class="table ">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th scope="col">Id_Partida</th>
+                                            <th scope="col">Benefactor</th>
+                                            <th scope="col">T.Partida</th>
+                                            <th scope="col">Año</th>
+                                            <th scope="col">Mes</th>
+                                            <th scope="col">Nro_Orden</th>
+                                            <th scope="col">Raciones</th>
+                                            <th scope="col">Monto</th>
+                                            <th scope="col">Invertido</th>
+                                            <th scope="col">Saldo</th>
+                                            <th scope="col">Acreditacion</th>
+                                            <th scope="col"></th>
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody id="resultado">
+
+
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="text-bg-secondary text-center">
+                                            <td colspan="7"></td>
+                                            <td>Total</td>
+                                            <td>Invertido</td>
+                                            <td>Saldo</td>
+                                            <td></td>
+                                            <td></td>
+
+                                        </tr>
+                                        <tr class="filaDeTotales text-center">
+                                            <td colspan="7"></td>
+                                            <td id="totalMontoPartidas">0</td>
+                                            <td id="totalInvertidoPartidas">0</td>
+                                            <td id="totalSaldoParidas">0</td>
+                                            <td></td>
+                                            <td></td>
+
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+        <div class="modal fade" id="mi-segundo-modal" tabindex="-1" role="dialog" aria-labelledby="mi-segundo-modal-titulo" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="mi-segundo-modal-titulo" class="text-center text-danger">Agregar inversion presupuestaria</h5>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Mover aquí el código HTML del formulario -->
+                        <div id="contenedor-form" class="container bg-body border border-2 border-info rounded-3 p-3">
+                            <h1 class="text-center"></h1>
+
+                            <form id="nueva-inversion" action="php/nuevapartida.php" method="POST">
+                                <div class="mb-3">
+
+                                    <div class="row">
+
+                                        <div class="col">
+
+                                            <label for="provedor" class="form-label text-color-dark">Provedor:</label>
+                                            <input type="text" id="provedor" name="provedor" class="form-control" required>
+
+
+                                        </div>
+
+                                        <div class="col">
+                                            <label for="numero-ident" class="form-label text-color-dark">Identificador comprobante:</label>
+                                            <input type="text" id="numero-ident" name="numero-ident" class="form-control" required>
+
+                                        </div>
+                                        <div class="col">
+
+                                            <label for="fecha-inversion" class="form-label text-color-dark">Fecha inversion:</label>
+                                            <input type="date" id="fecha-invesion" name="fecha-inversion" class="form-control" required>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="row">
+
+                                        <div class="col">
+
+                                            <label for="monto-inversion" class="form-label text-color-dark">Monto inversion:</label>
+                                            <input type="number" id="monto-inversion" name="monto-inversion" class="form-control" required>
+
+
+                                        </div>
+
+                                        <div class="col">
+                                            <label for="descripcion" class="form-label text-color-dark">Descripcion:</label>
+                                            <input type="text-area" id="descripcion" name="descripcion" class="form-control" required>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col">
+
+                                            <input type="hidden" id="idForm" name="idForm" class="form-control" value="ALTA">
+                                        </div>
+
+
+
+                                    </div>
+
+
+                                </div>
+                                <div id="botonesModal" class="d-flex justify-content-center">
+                                    <button type="submit" id="enviarForm" class="btn btn-primary btn-lg mt-3 m-3">Confirmar Alta</button>
+                                    <button type="submit" id="editarForm" class="btn btn-primary btn-lg mt-3 m-3">Confirmar Edicion</button>
+
+                                    <button id="cerrar-mi-segundo-modal" class="btn btn-danger btn-lg mt-3 m-3">Cerrar</button>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="modal fade" id="nueva-partida-modal" tabindex="-1" role="dialog" aria-labelledby="mi-segundo-modal-titulo" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="mi-segundo-modal-titulo" class="text-center text-danger">Agregar partida presupuestaria</h5>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Mover aquí el código HTML del formulario -->
+                        <div id="contenedor-form" class="container bg-body border border-2 border-info rounded-3  p-3">
+                            <h1 id="titulo" class="text-center">Agregar partida presupuestaria</h1>
+
+                            <form id="nueva-partida" action="php/partidas.php" method="POST">
+                                <div class="mb-3">
+
+                                    <div class="row">
+
+                                        <div class="col">
+                                            <label for="idBenefactor" class="form-label">Benefactor:</label>
+                                            <select class="form-select" id="idBenefactor" name="idBenefactor" required>
+                                              <option value="" selected disabled>Seleccione Benefactor</option> 
+                                            </select>
+
+                                        </div>
+
+                                        <div class="col">
+                                            <label for="idTipopartida" class="form-label">Tipo Partida:</label>
+                                            <select class="form-select" id="idTipopartida" name="idTipopartida" required>
+                                              <option value="" selected disabled>Seleccione tipo partida</option>
+                                             
+                                            </select>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col">
+                                            <label for="numero-orden" class="form-label text-color-dark">Numero de orden:</label>
+                                            <input type="number" id="numero-orden" name="numero-orden" class="form-control" required>
+
+                                        </div>
+                                        <div class="col">
+
+                                            <label for="fecha-acreditacion" class="form-label text-color-dark">Fecha acreditacion:</label>
+                                            <input type="date" id="fecha-acreditacion" name="fecha-acreditacion" class="form-control" required>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+
+                                        <div class="col">
+
+                                            <label for="anio" class="form-label">Año Partida:</label>
+                                            <select class="form-select" id="anio" name="anio" required>
+                                              <option value="" selected disabled>Seleccione año partida</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col">
+
+
+                                            <label for="mes" class="form-label">Mes Partida:</label>
+                                            <select class="form-select" id="mes" name="mes" required>  
+                                              <option value="" selected disabled>Seleccione mes partida</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col">
+
+                                            <label for="raciones" class="form-label text-color-dark">Raciones:</label>
+                                            <input type="number" id="raciones" name="raciones" class="form-control" required>
+
+
+                                        </div>
+
+
+                                        <div class="col">
+
+                                            <label for="monto-periodo" class="form-label text-color-dark">Monto periodo:</label>
+                                            <input type="number" id="monto-periodo" name="monto-periodo" class="form-control" required>
+
+
+                                        </div>
+
+                                    </div>
+
+
+
+
+                                    <div class="row">
+
+                                        <div class="col">
+
+
+                                            <input type="hidden" id="idForm" name="idForm" value="ALTA">
+
+
+                                        </div>
+
+
+                                    </div>
+
+
+                                </div>
+                                <div id="botonesModal" class="d-flex justify-content-center">
+                                    <button type="submit" id="enviarForm" class="btn btn-primary btn-lg mt-3 m-3">Confirmar Alta</button>
+                                    <button type="submit" id="editarForm" class="btn btn-primary btn-lg mt-3 m-3">Confirmar Edicion</button>
+
+                                    <button id="cerrar-mi-segundo-modal" class="btn btn-danger btn-lg mt-3 m-3">Cerrar</button>
+
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="inversiones" tabindex="-1" role="dialog" aria-labelledby="mi-segundo-modal-titulo" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <img id="imagenModal" class="d-none" src="" alt="Imagen del modal">
+
+                    <div id="datos" class="container modal-header  justify-content-center">
+
+                        <div id="datosPartida" class="col-sm-11 text-center  p-2 m-2  fs-5 border border-dark border-2 rounded"></div>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Mover aquí el código HTML del formulario -->
+
+                        <div id=contenedorTabla class="conteiner">
+                            <div class="row">
+                                <div id="contenedorInfo-Tabla" class="container">
+
+
+
+                                    <div class="row justify-content-center totalPartida">
+                                        <div class="col-sm-2 text-center bg-secondary text-white p-2 m-2 rounded">Total Partida</div>
+                                        <div class="col-sm-1 text-center bg-light p-2 m-2 border border-dark border-2 rounded montoPartida fw-bold">0</div>
+                                        <div class="col-sm-2 text-center bg-secondary text-white p-2 m-2 rounded">Total Invertido</div>
+                                        <div class="col-sm-1 text-center bg-light p-2 m-2 border border-dark border-2 rounded invertido fw-bold">0</div>
+                                        <div class="col-sm-2 text-center bg-secondary text-white p-2 m-2 rounded">Saldo</div>
+                                        <div class="col-sm-1 text-center bg-info p-2 m-2 border border-dark border-2 fw-bold rounded saldo">0</div>
+                                    </div>
+
+                                    <div class="table-responsive">
+
+
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Id Inversion</th>
+                                                    <th scope="col">Id Partida</th>
+                                                    <th class="text-center" scope="col">Datos Partida</th>
+                                                    <th scope="col">Comprobante</th>
+                                                    <th scope="col">Fecha inversion</th>
+                                                    <th scope="col">Provedor</th>
+                                                    <th scope="col">Inversion</th>
+                                                    <th scope="col">Observasion</th>
+                                                    <th scope="col"></th>
+
+                                                </tr>
+                                            </thead>
+
+                                            <tbody id="resultado"></tbody>
+                                        </table>
+                                    </div>
+
+
+                                    <div class="row justify-content-center totalPartida">
+                                        <div class="col-sm-2 text-center bg-secondary text-white p-2 m-2 rounded">Total Partida</div>
+                                        <div class="col-sm-1 text-center bg-light p-2 m-2 border border-dark border-2 rounded montoPartida fw-bold">0</div>
+                                        <div class="col-sm-2 text-center bg-secondary text-white p-2 m-2 rounded">Total Invertido</div>
+                                        <div class="col-sm-1 text-center bg-light p-2 m-2 border border-dark border-2 rounded invertido fw-bold">0</div>
+                                        <div class="col-sm-2 text-center bg-secondary text-white p-2 m-2 rounded">Saldo</div>
+                                        <div class="col-sm-1 text-center bg-info p-2 m-2 border border-dark border-2 fw-bold rounded saldo">0</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="modal-footer d-flex justify-content-center">
+
+
+                        <div class="row"> <button id="000" class="invertir2 btn btn-primary btn-lg mt-3  m-3" style="width: auto;" data-idpartida="" data-idbenefactor="" data-nombrebenefactor="" data-idtipopartida="" data-nombretipopartida="" data-anio="" data-mes="" data-toggle="modal"
+                                data-target="mi-segundo-modal">
+                        <i class="icofont-ui-add"></i>&nbsp;Invertir
+                        </button></div>
+
+                        <button id="cerrarVerInversiones" class="btn btn-danger btn-lg mt-3 m-3">Cerrar</button>
+
+                        <button id="imprimirInversiones" class="btn btn-info btn-lg mt-3 m-3">Imprimir</button>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <script src='js/gestionpartidas.js' type="module"></script>
+</body>
+
+</html>
